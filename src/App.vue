@@ -6,6 +6,7 @@ import HelloWorld from "./components/HelloWorld.vue";
   <header>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
+      <!-- <router-link to="/home">Go to Home</router-link> -->
     </div>
   </header>
 </template>
