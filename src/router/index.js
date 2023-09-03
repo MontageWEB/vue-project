@@ -5,13 +5,13 @@ import { createRouter, createWebHistory } from 'vue-router';
 // 创建路由实例
 const publicRoutes = [
   {
-    path: '/home',
-    component: () => import('../views/home.vue')
-  },
-  {
     path: '/login',
     component: () => import('../views/login/index.vue')
-  }
+  },
+  {
+    path: '/test',
+    component: () => import('../views/test.vue')
+  },
 ]
 
 const router = createRouter({

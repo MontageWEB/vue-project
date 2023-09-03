@@ -1,11 +1,11 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form">
+    <el-form class="login-form" :model="loginForm" :rules="loginRules">
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
 
-      <el-form-item>
+      <el-form-item prop="username">
         <span class="svg-container">
           <el-icon>
             <svg
@@ -20,14 +20,24 @@
             </svg>
           </el-icon>
         </span>
-        <el-input placeholder="username" name="username" />
+        <el-input
+          placeholder="username"
+          name="username"
+          type="text"
+          v-model="loginForm.username"
+        />
       </el-form-item>
 
-      <el-form-item>
+      <el-form-item prop="password">
         <span class="svg-container">
           <i class="iconfont icon-pwd"></i>
         </span>
-        <el-input placeholder="password" name="password" />
+        <el-input
+          placeholder="password"
+          name="password"
+          type="text"
+          v-model="loginForm.password"
+        />
         <span class="show-pwd">
           <i class="iconfont icon-yincangmima"></i>
         </span>
@@ -41,36 +51,37 @@
 </template>
 
 <script setup>
-import {} from "vue";
+import { ref } from "vue";
+import { validatePassword } from "./rules";
 // import LangSelect from '@/components/LangSelect/index.vue'
-// import { validatePassword } from './rules'
 // import { useStore } from 'vuex'
 // import { useRouter } from 'vue-router'
 // import { useI18n } from 'vue-i18n'
 
-// // 数据源
-// const loginForm = ref({
-//   username: 'super-admin',
-//   password: '123456'
-// })
-// // 验证规则
+// 数据源
+const loginForm = ref({
+  username: "super-admin",
+  password: "123456",
+});
+// 验证规则
 // const i18n = useI18n()
-// const loginRules = ref({
-//   username: [
-//     {
-//       required: true,
-//       trigger: 'blur',
-//       message: i18n.t('msg.login.usernameRule')
-//     }
-//   ],
-//   password: [
-//     {
-//       required: true,
-//       trigger: 'blur',
-//       validator: validatePassword()
-//     }
-//   ]
-// })
+const loginRules = ref({
+  username: [
+    {
+      required: true,
+      trigger: "blur",
+      message: "用户名为必填项",
+      // message: i18n.t("msg.login.usernameRule"),
+    },
+  ],
+  password: [
+    {
+      required: true,
+      trigger: "blur",
+      validator: validatePassword(),
+    },
+  ],
+});
 
 // // 处理密码框文本显示状态
 // const passwordType = ref('password')
@@ -106,7 +117,7 @@ import {} from "vue";
 //   })
 // }
 </script>
-<!-- <style lang="scss" scoped></style> -->
+
 <style lang="scss" scoped>
 $bg: #2d3a4b;
 $dark_gray: #889aa4;
