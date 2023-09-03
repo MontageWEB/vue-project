@@ -35,11 +35,19 @@
         <el-input
           placeholder="password"
           name="password"
-          type="text"
+          :type="passwordType"
           v-model="loginForm.password"
         />
         <span class="show-pwd">
-          <i class="iconfont icon-yincangmima"></i>
+          <span class="svg-container" @click="onChangePwdType">
+            <i
+              :class="
+                passwordType === 'password'
+                  ? 'iconfont icon-eye'
+                  : 'iconfont icon-eye-open'
+              "
+            ></i>
+          </span>
         </span>
       </el-form-item>
 
@@ -83,15 +91,15 @@ const loginRules = ref({
   ],
 });
 
-// // 处理密码框文本显示状态
-// const passwordType = ref('password')
-// const onChangePwdType = () => {
-//   if (passwordType.value === 'password') {
-//     passwordType.value = 'text'
-//   } else {
-//     passwordType.value = 'password'
-//   }
-// }
+// 处理密码框文本显示状态
+const passwordType = ref("password");
+const onChangePwdType = () => {
+  if (passwordType.value === "password") {
+    passwordType.value = "text";
+  } else {
+    passwordType.value = "password";
+  }
+};
 
 // // 登录动作处理
 // const loading = ref(false)
@@ -209,7 +217,6 @@ $cursor: #fff;
   .show-pwd {
     position: absolute;
     right: 10px;
-    top: 7px;
     font-size: 16px;
     color: $dark_gray;
     cursor: pointer;
