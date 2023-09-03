@@ -1,22 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-// const Index = () => import('../views/index.vue') 
-const Home = () => import('../views/home.vue')
+// const Home = () => import('../views/home.vue')
 
 // 创建路由实例
+const publicRoutes = [
+  {
+    path: '/home',
+    component: () => import('../views/home.vue')
+  },
+  {
+    path: '/login',
+    component: () => import('../views/login/index.vue')
+  }
+]
+
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    // 定义路由配置
-    // {
-    //   path: '/',
-    //   component: Index
-    // },
-    {
-      path: '/home',
-      component: Home
-    }
-  ]
+  routes: publicRoutes
 });
 
 export default router
