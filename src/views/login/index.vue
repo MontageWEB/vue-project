@@ -1,6 +1,11 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" :model="loginForm" :rules="loginRules">
+    <el-form
+      class="login-form"
+      ref="loginFromRef"
+      :model="loginForm"
+      :rules="loginRules"
+    >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -51,7 +56,11 @@
         </span>
       </el-form-item>
 
-      <el-button type="primary" style="width: 100%; margin-bottom: 30px"
+      <el-button
+        type="primary"
+        style="width: 100%; margin-bottom: 30px"
+        :loading="loading"
+        @click="handlerLogin"
         >登录
       </el-button>
     </el-form>
@@ -62,7 +71,7 @@
 import { ref } from "vue";
 import { validatePassword } from "./rules";
 // import LangSelect from '@/components/LangSelect/index.vue'
-// import { useStore } from 'vuex'
+// import { useStore } from "vuex";
 // import { useRouter } from 'vue-router'
 // import { useI18n } from 'vue-i18n'
 
@@ -101,29 +110,29 @@ const onChangePwdType = () => {
   }
 };
 
-// // 登录动作处理
-// const loading = ref(false)
-// const loginFromRef = ref(null)
-// const store = useStore()
+// 登录动作处理
+const loading = ref(false);
+const loginFromRef = ref(null);
+// const store = useStore();
 // const router = useRouter()
 // const handleLogin = () => {
-//   loginFromRef.value.validate(valid => {
-//     if (!valid) return
+//   loginFromRef.value.validate((valid) => {
+//     if (!valid) return;
 
-//     loading.value = true
+//     loading.value = true;
 //     store
-//       .dispatch('user/login', loginForm.value)
+//       .dispatch("user/login", loginForm.value)
 //       .then(() => {
-//         loading.value = false
+//         loading.value = false;
 //         // 登录后操作
-//         router.push('/')
+//         router.push("/");
 //       })
-//       .catch(err => {
-//         console.log(err)
-//         loading.value = false
-//       })
-//   })
-// }
+//       .catch((err) => {
+//         console.log(err);
+//         loading.value = false;
+//       });
+//   });
+// };
 </script>
 
 <style lang="scss" scoped>
@@ -146,17 +155,22 @@ $cursor: #fff;
     margin: 0 auto;
     overflow: hidden;
 
-    ::v-deep .el-form-item {
+    ::v-deep() .el-form-item {
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       color: #454545;
     }
 
-    ::v-deep .el-input {
+    ::v-deep() .el-input {
       display: inline-block;
       height: 47px;
       width: 85%;
+
+      .el-input__wrapper {
+        background-color: transparent;
+        box-shadow: 0 0 0 0;
+      }
 
       input {
         background: transparent;
@@ -202,7 +216,7 @@ $cursor: #fff;
       font-weight: bold;
     }
 
-    ::v-deep .lang-select {
+    ::v-deep() .lang-select {
       position: absolute;
       top: 4px;
       right: 0;
