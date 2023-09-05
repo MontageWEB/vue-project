@@ -60,7 +60,7 @@
         type="primary"
         style="width: 100%; margin-bottom: 30px"
         :loading="loading"
-        @click="handlerLogin"
+        @click="handleLogin"
         >登录
       </el-button>
     </el-form>
@@ -70,10 +70,10 @@
 <script setup>
 import { ref } from "vue";
 import { validatePassword } from "./rules";
-// import LangSelect from '@/components/LangSelect/index.vue'
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
 // import { useRouter } from 'vue-router'
 // import { useI18n } from 'vue-i18n'
+// import LangSelect from '@/components/LangSelect/index.vue'
 
 // 数据源
 const loginForm = ref({
@@ -113,26 +113,28 @@ const onChangePwdType = () => {
 // 登录动作处理
 const loading = ref(false);
 const loginFromRef = ref(null);
-// const store = useStore();
+const store = useStore();
 // const router = useRouter()
-// const handleLogin = () => {
-//   loginFromRef.value.validate((valid) => {
-//     if (!valid) return;
+const handleLogin = () => {
+  loginFromRef.value.validate((valid) => {
+    if (!valid) return;
 
-//     loading.value = true;
-//     store
-//       .dispatch("user/login", loginForm.value)
-//       .then(() => {
-//         loading.value = false;
-//         // 登录后操作
-//         router.push("/");
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         loading.value = false;
-//       });
-//   });
-// };
+    loading.value = true;
+    store
+      .dispatch("user/login", loginForm.value)
+      .then(() => {
+        loading.value = false;
+        // 登录后操作
+        // router.push("/");
+        console.log("登录成功");
+      })
+      .catch((err) => {
+        console.log("登录失败");
+        console.log(err);
+        loading.value = false;
+      });
+  });
+};
 </script>
 
 <style lang="scss" scoped>
