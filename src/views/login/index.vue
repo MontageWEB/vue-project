@@ -8,6 +8,7 @@
     >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
+        <!-- <h3>{{ $store.state.user.name }}</h3> -->
       </div>
 
       <el-form-item prop="username">
@@ -72,11 +73,10 @@ import { ref } from "vue";
 import { validatePassword } from "./rules";
 import axios from "axios";
 import md5 from "md5";
-// Vue.prototype.axios = axios;
 axios.defaults.headers.common["Content-Type"] =
   "application/x-www-form-urlencoded;charset=UTF-8";
-// import { useStore } from "vuex";
-// import { useRouter } from 'vue-router'
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 // import { useI18n } from 'vue-i18n'
 // import LangSelect from '@/components/LangSelect/index.vue'
 
@@ -118,48 +118,26 @@ const onChangePwdType = () => {
 // 登录动作处理
 const loading = ref(false);
 const loginFromRef = ref(null);
-// const store = useStore();
-// const router = useRouter()
+const store = useStore();
+const router = useRouter();
+
 const handleLogin = () => {
   loginFromRef.value.validate((valid) => {
     if (!valid) return;
-
-    axios({
-      method: "post",
-      url: "https://api.imooc-admin.lgdsunday.club/user/login",
-      data: {
-        username: "super-admin",
-        password: md5("123456"),
-      },
-    }).then(
-      (res) => {},
-      (error) => {}
-    );
+    loading.value = true;
+    store
+      .dispatch("user/login", loginForm.value)
+      .then(() => {
+        loading.value = false;
+        console.log("登录成功");
+        // router.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        loading.value = false;
+      });
   });
 };
-
-// const handleLogin = () => {
-//   loginFromRef.value.validate((valid) => {
-//     if (!valid) return;
-
-//     console.log(useStore());
-
-//     loading.value = true;
-//     store
-//       .dispatch("user/login", loginForm.value)
-//       .then(() => {
-//         loading.value = false;
-//         // 登录后操作
-//         // router.push("/");
-//         console.log("登录成功");
-//       })
-//       .catch((err) => {
-//         console.log("登录失败");
-//         console.log(err);
-//         loading.value = false;
-//       });
-//   });
-// };
 </script>
 
 <style lang="scss" scoped>

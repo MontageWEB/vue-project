@@ -5,7 +5,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router/index.js'
-// import store from './store'
+import store from './store'
 
 import './styles/index.scss'
 import './styles/icon.css'
@@ -13,6 +13,8 @@ import './styles/icon.css'
 const app = createApp(App);
 
 app.use(ElementPlus);
+
+app.use(store);
 
 // 使用路由实例
 app.use(router);
