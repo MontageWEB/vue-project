@@ -71,10 +71,6 @@
 <script setup>
 import { ref } from "vue";
 import { validatePassword } from "./rules";
-import axios from "axios";
-import md5 from "md5";
-axios.defaults.headers.common["Content-Type"] =
-  "application/x-www-form-urlencoded;charset=UTF-8";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 // import { useI18n } from 'vue-i18n'
@@ -129,11 +125,9 @@ const handleLogin = () => {
       .dispatch("user/login", loginForm.value)
       .then(() => {
         loading.value = false;
-        console.log("登录成功");
-        // router.push("/");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         loading.value = false;
       });
   });

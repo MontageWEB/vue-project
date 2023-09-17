@@ -9,6 +9,10 @@ const publicRoutes = [
     component: () => import('../views/login/index.vue')
   },
   {
+    path: '/',
+    component: () => import('../layout/index.vue')
+  },
+  {
     path: '/test',
     component: () => import('../views/test.vue')
   },
