@@ -13,6 +13,14 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        javascriptEnabled: true,
+        additionalData: `@import './src/styles/index.scss';`,
+      },
+    },
+  },
   // 配置反向代理
   server: {
     // host: 'localhost',  // 启动后浏览器窗口输入地址就可以进行访问

@@ -8,7 +8,6 @@ import router from './router/index.js'
 import store from './store'
 import './permission'
 
-import './styles/index.scss'
 import './styles/icon.css'
 
 const app = createApp(App);

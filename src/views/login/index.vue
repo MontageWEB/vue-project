@@ -127,7 +127,7 @@ const handleLogin = () => {
         loading.value = false;
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
         loading.value = false;
       });
   });

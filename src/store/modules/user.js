@@ -1,4 +1,4 @@
-import { login } from '@/api/sys'
+import { login,getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 import { setItem, getItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
@@ -20,6 +20,7 @@ export default {
     }
   },
   actions: {
+    // 登录请求
     login(context, userInfo) {
       const { username, password } = userInfo
       return new Promise((resolve, reject) => {
@@ -36,6 +37,12 @@ export default {
             reject(err)
           })
       })
+    },
+    // 获取用户信息
+    async getUserInfo(context) {
+      const res = await getUserInfo()
+      this.commit('user/setUserInfo', res)
+      return res
     }
   }
 }
